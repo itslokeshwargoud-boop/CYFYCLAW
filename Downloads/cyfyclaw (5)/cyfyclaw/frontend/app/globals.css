@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* CYFY brand-derived dark enterprise palette */
+  --bg: #0a0e12;
+  --panel: #0f151b;
+  --panel-2: #12191f;
+  --border: #1e2831;
+  --text: #e6edf3;
+  --muted: #8b98a5;
+  --teal: #0095af;
+  --teal-bright: #22b8d4;
+  --amber: #f2a93b;
+  --danger: #e5484d;
+  --success: #3fb950;
+
+  /* Fonts: webfonts loaded at runtime in layout.tsx; robust fallbacks here. */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+}
+
+* {
+  border-color: var(--border);
+}
+
+/* Scrollbars — quiet, enterprise */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 152, 165, 0.25);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 152, 165, 0.45);
+}
+
+/* Prose styling for rendered markdown answers */
+.cc-prose {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.cc-prose h2 {
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 1.4rem 0 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.cc-prose h2:first-child {
+  margin-top: 0.2rem;
+}
+.cc-prose h3 {
+  font-size: 0.925rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+  color: var(--teal-bright);
+}
+.cc-prose p {
+  margin: 0.5rem 0;
+}
+.cc-prose ul,
+.cc-prose ol {
+  margin: 0.4rem 0 0.6rem;
+  padding-left: 1.25rem;
+}
+.cc-prose li {
+  margin: 0.2rem 0;
+}
+.cc-prose ul {
+  list-style: disc;
+}
+.cc-prose ol {
+  list-style: decimal;
+}
+.cc-prose strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.cc-prose a {
+  color: var(--teal-bright);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cc-prose code:not(pre code) {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.82em;
+  color: var(--amber);
+}
+.cc-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+  font-size: 0.85rem;
+}
+.cc-prose th,
+.cc-prose td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+.cc-prose th {
+  background: var(--panel-2);
+  font-weight: 600;
+}
+.cc-prose blockquote {
+  border-left: 3px solid var(--teal);
+  padding-left: 0.8rem;
+  color: var(--muted);
+  margin: 0.6rem 0;
+}
+
+/* highlight.js — compact dark theme tuned to the palette */
+.hljs {
+  color: #d6dee6;
+  background: transparent;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in { color: #22b8d4; }
+.hljs-string,
+.hljs-attr { color: #7ee787; }
+.hljs-number,
+.hljs-literal { color: #f2a93b; }
+.hljs-comment { color: #6b7684; font-style: italic; }
+.hljs-title,
+.hljs-name,
+.hljs-type { color: #79c0ff; }
+.hljs-meta,
+.hljs-symbol { color: #f2a93b; }
+.hljs-deletion { color: var(--danger); }
+.hljs-addition { color: var(--success); }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

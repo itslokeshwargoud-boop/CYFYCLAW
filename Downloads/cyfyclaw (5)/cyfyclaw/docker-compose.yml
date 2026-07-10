@@ -1,0 +1,35 @@
+# CyfyClaw — full-stack local / single-host deployment.
+# Usage: cp .env.example .env && edit .env && docker compose up --build
+services:
+  backend:
+    build:
+      context: ./backend
+    image: cyfyclaw-backend:latest
+    env_file: .env
+    environment:
+      API_PORT: 8000
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Baked into the client bundle at build time. For a same-host reverse
+        # proxy setup, point this at your public API URL (e.g. https://api.example.com).
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    image: cyfyclaw-frontend:latest
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
